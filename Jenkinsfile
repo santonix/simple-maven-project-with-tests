@@ -1,4 +1,4 @@
-node ('master') {
+node ('built-in') {
     checkout scm // Checkout the source code
 
     stage('Build') {

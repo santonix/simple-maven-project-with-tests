@@ -2,7 +2,7 @@ node ('built-in') {
     checkout scm // Checkout the source code
 
     stage('Build') {
-        withMaven(maven: 'M3') {
+        withMaven(maven: 'maven3') {
             if (isUnix()) {
                 sh 'mvn -Dmaven.test.failure.ignore clean package' // Execute Maven build (Unix)
             } else {

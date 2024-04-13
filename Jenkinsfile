@@ -26,8 +26,8 @@ pipeline {
             steps {
                 withSonarQubeEnv(credentialsId: 'sonar-token', installationName: 'sonarqube server') {
                     sh '''mvn clean verify sonar:sonar \
-                        -Dsonar.projectName=hello-world-greeting \
-                        -Dsonar.projectKey=hello-world-greeting \
+                        -Dsonar.projectName=simple-maven-project-with-tests \
+                        -Dsonar.projectKey=simple-maven-project-with-tests \
                         -Dsonar.projectVersion=${BUILD_NUMBER} \
                         -Dsonar.java.binaries=target/classes'''
                 }

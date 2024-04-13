@@ -14,7 +14,7 @@ pipeline {
             steps {
                 withMaven(maven: 'maven3') {
                     script {
-                        sh 'mvn clean verify'
+                        sh 'mvn clean install'
                     }
                 }
             }

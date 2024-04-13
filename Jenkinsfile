@@ -1,19 +1,19 @@
 pipeline {
-    agent none
+    agent any
     environment {
         DOCKER_CREDENTIALS = credentials('dockerhub-credentials')
     }
 
     stages {
         stage('Poll') {
-            agent { label 'docker' }
+            
             steps {
                 checkout scm
             }
         }
         
         stage('Build & Unit test') {
-            agent { label 'docker' }
+            
             steps {
                 sh 'mvn clean verify '
                 junit '**/target/surefire-reports/TEST-*.xml'
@@ -22,7 +22,7 @@ pipeline {
         }
 
         stage('Build & SonarQube Analysis') {
-            agent { label 'docker' }
+           
             steps {
                 withSonarQubeEnv(credentialsId: 'jenkins-sonar-token', installationName: 'sonarqube server') {
                     sh '''mvn clean verify sonar:sonar \
@@ -35,7 +35,7 @@ pipeline {
         }
 
         stage('Integration Test') {
-            agent { label 'docker' }
+            
             steps {
                 sh 'mvn clean verify -Dsurefire.skip=true'
                 junit '**/target/failsafe-reports/TEST-*.xml'
@@ -44,7 +44,7 @@ pipeline {
         }
 
         stage('Publish') {
-            agent { label 'docker' }
+            
             steps {
                 script {
                     def server = Artifactory.server 'default artifactory server'

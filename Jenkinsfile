@@ -14,11 +14,7 @@ pipeline {
             steps {
                 withMaven(maven: 'maven3') {
                     script {
-                        if (isUnix()) {
-                            sh 'mvn -Dmaven.test.failure.ignore clean package' // Execute Maven build (Unix)
-                        } else {
-                            bat 'mvn -Dmaven.test.failure.ignore clean package' // Execute Maven build (Windows)
-                        }
+                        sh 'mvn clean verify'
                     }
                 }
             }

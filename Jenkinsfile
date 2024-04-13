@@ -15,7 +15,7 @@ pipeline {
         stage('Build & Unit test') {
             agent { label 'docker' }
             steps {
-                sh 'mvn clean verify -DskipITs=true'
+                sh 'mvn clean verify '
                 junit '**/target/surefire-reports/TEST-*.xml'
                 archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
             }

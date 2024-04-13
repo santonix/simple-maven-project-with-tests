@@ -17,7 +17,7 @@ pipeline {
             steps {
                 sh 'mvn clean verify -DskipITs=true'
                 junit '**/target/surefire-reports/TEST-*.xml'
-                archiveArtifacts artifacts: 'target/*.war', fingerprint: true
+                archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
             }
         }
 
@@ -39,7 +39,7 @@ pipeline {
             steps {
                 sh 'mvn clean verify -Dsurefire.skip=true'
                 junit '**/target/failsafe-reports/TEST-*.xml'
-                archiveArtifacts artifacts: 'target/*.war', fingerprint: true
+                archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
             }
         }
 
@@ -51,7 +51,7 @@ pipeline {
                     def uploadSpec = """{
                         "files": [
                             {
-                                "pattern": "target/hello-0.0.1.war",
+                                "pattern": "target/hello-0.0.1.jar",
                                 "target": "hello-world-greeting/${BUILD_NUMBER}/",
                                 "props": "Integration-Tested=Yes;Performance-Tested=No"
                             }
